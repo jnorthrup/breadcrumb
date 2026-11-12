@@ -35,6 +35,28 @@ yarn global add breadcrumb-cli
 bun add -g breadcrumb-cli
 ```
 
+### Grok Build plugin
+
+For [Grok Build](https://x.ai/cli) users:
+
+```bash
+# Add this repo as a marketplace, then install
+grok plugin marketplace add tylergibbs1/breadcrumb
+grok plugin install breadcrumb --trust
+```
+
+Or install directly from a local checkout:
+
+```bash
+grok plugin install . --trust
+```
+
+The plugin:
+- Auto-installs the CLI if not present
+- Auto-initializes `.breadcrumbs.json` on session start
+- Injects notes into Grok's context when reading files (via `PostToolUse` on `Read` / `read_file`)
+- Grok acknowledges notes when they conflict with the current task
+
 ### Claude Code plugin
 
 For Claude Code users, the plugin auto-shows notes when reading files:
@@ -257,7 +279,7 @@ Attach proof to notes — the input that would break if the code changed:
 
 ```bash
 breadcrumb add ./src/parser.ts "Regex handles escaped templates" \
-  --evidence-input '\${foo}' \
+  --evidence-input '\\${foo}' \
   --evidence-expected 'should NOT match' \
   --evidence-actual 'would match if simplified'
 ```
@@ -267,7 +289,7 @@ Evidence answers "what breaks?" — agents can verify whether their change trigg
 ```json
 {
   "status": "info",
-  "suggestion": "Regex handles escaped templates\nEvidence:\n  Input: \\${foo}\n  Expected: should NOT match\n  If changed: would match if simplified"
+  "suggestion": "Regex handles escaped templates\nEvidence:\n  Input: \\\\${foo}\n  Expected: should NOT match\n  If changed: would match if simplified"
 }
 ```
 
@@ -290,6 +312,7 @@ Breadcrumb works with **any AI agent system** that can run shell commands.
 |-----------|-------------|
 | CLI (`breadcrumb`) | Node.js 18+ (or Bun) |
 | `.breadcrumbs.json` | Plain JSON - works everywhere |
+| Grok Build plugin | Optional integration (hooks + skill) |
 | Claude Code plugin | Optional integration |
 
 For other tools (Cursor, Windsurf, Aider), add to your system prompt or equivalent:
