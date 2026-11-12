@@ -1,0 +1,22 @@
+{
+  "name": "breadcrumb",
+  "version": "3.6.0",
+  "description": "Leave notes on files for other agents to see in future sessions. Auto-checks for notes when reading files.",
+  "author": {
+    "name": "Tyler Gibbs",
+    "url": "https://github.com/tylergibbs1"
+  },
+  "homepage": "https://github.com/tylergibbs1/breadcrumb",
+  "repository": "https://github.com/tylergibbs1/breadcrumb",
+  "license": "MIT",
+  "keywords": [
+    "breadcrumb",
+    "warnings",
+    "agent-communication",
+    "file-context",
+    "hooks",
+    "session-coordination"
+  ],
+  "skills": "./breadcrumb-plugin/skills/",
+  "hooks": "./breadcrumb-plugin/hooks/hooks.json"
+}
